@@ -2,6 +2,32 @@ google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
 
 
+var date1 = moment().toDate();
+
+// var date2 = moment({
+//   y:2017,
+//   M:4,
+//   d:3,
+//   h:15,
+//   m:10,
+//   ms:123
+// })
+
+var chartData = [{
+  date: date1,
+  count: 8
+}];
+
+var chart1 = calendarHeatmap()
+              .data(chartData)
+              .selector('#cal-heatmap')
+              .colorRange(['#feb5b5', '#af5353'])
+              .tooltipEnabled(true)
+              .onClick(function (data) {
+                console.log('onClick callback. Data:', data);
+              });
+
+chart1();
 
 function drawChart(){
   const datatable =[];
@@ -43,7 +69,7 @@ $.getJSON(url,(data)=>{
       datatable.push(arr)
     }
 
-    console.log(datatable)
+    //console.log(datatable)
 
   //get the sum of hours for the week
     //First flatten the datatable array
@@ -123,5 +149,6 @@ $.getJSON(url,(data)=>{
 
 
 $(window).resize(function(){
+  console.log("edfs")
   drawChart();
 });
